@@ -203,12 +203,12 @@ def index():
         """)
         
         datas = list(db_engine.fetchall())
-        str1 = ""
+        all_matched = ""
         for data in datas:
-            for i in data:
-                str1 += str(i)
-            str1 += "% "
-        str1 = "在曾經參與此網站檢測的人當中，與你適配的異性有 : " + str1 + "<br>"
+            for num in data:
+                all_matched += str(num)
+            all_matched += "% "
+        all_matched = "在曾經參與此網站檢測的人當中，與你適配的異性有 : " + all_matched + "<br>"
         db_engine.execute(f"""
             
             select area,
@@ -219,12 +219,12 @@ def index():
             order by percentage desc;
         """)
         datas = list(db_engine.fetchall())
-        str2 = ""
+        area_matched = ""
         for data in datas:
-            for i in data:
-                str2 += str(i)
-            str2 += "% "
-        str2 = "配對對象的地區分布 : " + str2 + "<br>"
+            for num in data:
+                area_matched += str(num)
+            area_matched += "% "
+        area_matched = "配對對象的地區分布 : " + area_matched + "<br>"
         db_engine.execute(f"""
             select 
 	            star_sign,
@@ -236,12 +236,12 @@ def index():
             order by percentage desc
         """)
         datas = list(db_engine.fetchall())
-        str3 = ""
+        star_matched = ""
         for data in datas:
-            for i in data:
-                str3 += str(i)
-            str3 += "% "
-        str3 = "配對對象的星座分布 : " + str3 + "<br>"
+            for num in data:
+                star_matched += str(num)
+            star_matched += "% "
+        star_matched = "配對對象的星座分布 : " + star_matched + "<br>"
         db_engine.execute(f"""
             select 
                 school_name,
@@ -253,13 +253,13 @@ def index():
             order by percentage desc
         """)
         datas = list(db_engine.fetchall())
-        str4 = ""
+        school_matched = ""
         for data in datas:
-            for i in data:
-                str4 += str(i)
-            str4 += "% "
-        str4 = "配對對象的學校分布 : " + str4 + "<br>"
-        return "你的性格是 : " + mbti + "<br>" + mbti_statement[mbti][0] + " : " + mbti_statement[mbti][1] + "<br>" + str1 + str2 + str3 + str4
+            for num in data:
+                school_matched += str(num)
+            school_matched += "% "
+        school_matched = "配對對象的學校分布 : " + school_matched + "<br>"
+        return "你的性格是 : " + mbti + "<br>" + mbti_statement[mbti][0] + " : " + mbti_statement[mbti][1] + "<br>" + all_matched + area_matched + star_matched + school_matched
 
     return render_template('layout.html',form=form)
 
