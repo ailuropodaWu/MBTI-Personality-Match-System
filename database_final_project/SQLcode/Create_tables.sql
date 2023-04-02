@@ -9,16 +9,16 @@ drop table if exists test_result;
 
 create table subject
 (
-	index int,
+	num int,
 	email varchar(50),
 	gender varchar(5),
 	age int,
-	primary key (index)
+	primary key (num)
 );
 
 create table test_result
 (
-	index int,
+	num int,
 	q1	int,
 	q2	int,
 	q3	int,
@@ -36,7 +36,7 @@ create table test_result
 	q15	int,
 	q16 int,
 	mbti_result varchar(5),
-	primary key (index)
+	primary key (num)
 );
 
 create table school
@@ -48,10 +48,10 @@ create table school
 
 create table study
 (
-	index int,
+	num int,
 	school_name varchar(20),
 	study_group varchar(20),
-	primary key(index)
+	primary key(num)
 );
 
 create table area
@@ -62,9 +62,9 @@ create table area
 
 create table hometown
 (
-	index int,
+	num int,
 	area varchar(10),
-	primary key(index)
+	primary key(num)
 );
 
 create table star_sign
@@ -75,7 +75,7 @@ create table star_sign
 
 create table subject_star_sign
 (
-	index int,
+	num int,
 	star_sign varchar(10),
-	primary key(index)
+	primary key(num)
 );

@@ -1,9 +1,11 @@
-drop table if exists reply cascade;
-drop table if exists mbti_match cascade;
+
+drop table if exists reply;
+drop table if exists mbti_match;
+
 
 create table reply
 (
-	index int,
+	num int,
 	email varchar(50),
 	q1	int,
 	q2	int,
@@ -28,7 +30,7 @@ create table reply
 	age	int,
 	area varchar(10),
 	mbti_result varchar(5),
-	primary key(index)
+	primary key(num)
 );
 
 create table mbti_match
@@ -37,8 +39,8 @@ create table mbti_match
 	suitable_mbti varchar(5),
 	primary key (asked_mbti,suitable_mbti)
 );
-
-copy reply(index, email, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, 
+/*
+copy reply(num, email, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, 
 			q11, q12, q13, q14, q15, q16, school_name, gender, study_group,
 		   star_sign, age, area, mbti_result)
 from 'database_final_project\data\Reply.csv'
@@ -49,3 +51,4 @@ copy mbti_match(asked_mbti, suitable_mbti)
 from 'database_final_project\data\MBTI_match.csv'
 delimiter ','
 csv header;
+*/
