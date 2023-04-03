@@ -1,5 +1,5 @@
 # NYCU-Intro-Database-Final-Project
-**MBTI Personality Match System**<br>
+### **MBTI Personality Match System**<br>
 ***This was originally a group project, and I refactor it based on***
 https://github.com/HaKkaz/NYCU-Introduction-to-Database-Systems
 ## Group Member
