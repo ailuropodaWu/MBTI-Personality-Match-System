@@ -27,7 +27,7 @@ class MyForm(FlaskForm):
     Q16 = SelectField(u'Q16 : 我的行為模式"易於預測"', choices=[('1','1'),('2','2'),('3','3'),('4','4'),('5','5')])
     submit = SubmitField('Submit')
 
-def get_data(form, cursor):
+def get_data(form, conn):
     '''
     get data
     '''
@@ -64,6 +64,7 @@ def get_data(form, cursor):
     '''
     Database update
     '''
+    cursor = conn.cursor()
     cursor.execute("""
         select max(num) from test_result;
     """)
@@ -90,5 +91,5 @@ def get_data(form, cursor):
         insert into hometown(num, area)
         VALUES ({num}, '{area}');
     """)
-    cursor.execute("COMMIT")
+    conn.commit()
     return mbti, gender, age

@@ -1,5 +1,5 @@
 html {
-  background: url("https://images3.alphacoders.com/793/793579.jpg") no-repeat center center fixed;
+  background: url("https://truth.bahamut.com.tw/s01/201912/3f6973d7c5ade36590b1c2fb14a6876f.PNG") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -18,13 +18,13 @@ html {
     }
 }
 .form-group{
-    color: white;
+    color: rgb(0, 0, 0);
 }
 .form-control{
     font-size: 20px;
 }
 .btn{
-    color: white;
+    color: rgb(0, 0, 0);
     width:120px;
     height:60px;
     font-size: 30px;
