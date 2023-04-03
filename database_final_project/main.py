@@ -2,11 +2,10 @@
 from flask import Flask, redirect, url_for, render_template, request, jsonify
 from flask_cors import CORS
 from flask_bootstrap import Bootstrap
+from flask_wtf.csrf import CSRFProtect
 import os
 import sqlite3
-from flask_wtf.csrf import CSRFProtect
 
-from database import build_the_db
 from form import MyForm, get_data
 from mbti import mbti_statement
 '''
@@ -25,7 +24,6 @@ rds_password = "13579753159"
 rds_database = "data"
 '''
 
-build_the_db()
 
 
 '''

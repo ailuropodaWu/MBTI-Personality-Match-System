@@ -4,7 +4,6 @@ import pandas
 
 def build_the_db():
     conn = sqlite3.connect('database-project.db')
-
     cursor = conn.cursor()
 
     f = open('database_final_project\SQLcode\Create_reply.sql')
@@ -28,3 +27,6 @@ def build_the_db():
     conn.commit()
     cursor.close()
     conn.close()
+
+if __name__ == '__main__':
+    build_the_db()
