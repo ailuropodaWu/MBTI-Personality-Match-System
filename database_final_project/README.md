@@ -9,7 +9,7 @@
 * The matching principle is founded on the MBTI system.
 ### DEMO  
 Run the following code to check the function
-```
+```cmd
 flask --app main --debug run
 ```
 Run the following code to reset the database
