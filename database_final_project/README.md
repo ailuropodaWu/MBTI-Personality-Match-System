@@ -1,7 +1,7 @@
 # MBTI Personality Match System
 
 ## INTRODUCTION
-**By answering some sexual-orientation questions, we will tell you the proportion of opposite-sex users whose personality is compatible with yours in the database we selected.**
+**By answering some questions, we will tell you the proportion of opposite-sex users whose personality is compatible with yours in the database we selected.**
 
 ### Technical Syllabus
 * Developing the frontend and backend using Flask.
