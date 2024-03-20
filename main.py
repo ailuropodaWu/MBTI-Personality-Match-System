@@ -33,7 +33,7 @@ Function to get form data.
 @app.route('/',methods=['GET', 'POST'])
 def index():
     form = MyForm()
-    conn = sqlite3.connect('database-project.db', check_same_thread=False)
+    conn = sqlite3.connect('./database/database-project.db', check_same_thread=False)
     db_engine = conn.cursor()
     if request.method == 'POST' and form.validate():
         '''
