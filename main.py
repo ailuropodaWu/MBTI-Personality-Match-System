@@ -145,9 +145,9 @@ def index():
         db_engine.close()
         conn.close()
     else:
-        conn = sqlite3.connect('database-project.db', check_same_thread=False)
+        conn = sqlite3.connect('./database/database-project.db', check_same_thread=False)
         db_engine = conn.cursor()
-        return render_template('layout.html',form=form)
+        return render_template('index.html',form=form)
 
 if __name__ == '__main__':
     app.config['JSON_AS_ASCII'] = False

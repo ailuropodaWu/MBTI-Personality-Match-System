@@ -1,5 +1,5 @@
 html {
-  background: url("https://truth.bahamut.com.tw/s01/201912/3f6973d7c5ade36590b1c2fb14a6876f.PNG") no-repeat center center fixed;
+  background: url("https://hips.hearstapps.com/hmg-prod/images/wooden-blocks-with-the-letters-mbti-on-blue-royalty-free-image-1710234359.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -18,7 +18,7 @@ html {
     }
 }
 .form-group{
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 .form-control{
     font-size: 20px;
