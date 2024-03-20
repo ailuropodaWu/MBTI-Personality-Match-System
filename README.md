@@ -9,14 +9,16 @@
 * Create the database by sqlite3 in python
 * The matching principle is founded on the MBTI system.
 ### DEMO  
-Run the following code to check the function
+Run the following code to reset the database before demo
+```cmd
+python database.py
+```
+Run the following code to demo
 ```cmd
 flask --app main --debug run
 ```
-Run the following code to reset the database
-```
-python database.py
-```
+Website screenshot
+![alt text](./asset/image.png)
 
 ***This was originally a group project, and I redo it based on***
 https://github.com/HaKkaz/NYCU-Introduction-to-Database-Systems
