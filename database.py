@@ -3,7 +3,7 @@ import csv
 import pandas
 
 def build_the_db():
-    conn = sqlite3.connect('database-project.db')
+    conn = sqlite3.connect('./database/database-project.db')
     cursor = conn.cursor()
 
     f = open('database\SQLcode\Create_reply.sql')
