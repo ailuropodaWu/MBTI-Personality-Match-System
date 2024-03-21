@@ -9,6 +9,11 @@
 * Create the database by sqlite3 in python.
 * The matching principle is founded on the MBTI system.
 * The dataset was initialized with about 200 replies in the [Reply.csv](https://github.com/ailuropodaWu/NYCU-Intro-Database-Final-Project/blob/main/database/data/Reply.csv) collected from a google form with the same questions on the system.
+### Environment
+python version 3.9
+```cmd
+pip install -r requirement.txt
+```
 ### Running  
 Run the following code to reset the database before demo
 ```cmd

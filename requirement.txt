@@ -1,0 +1,6 @@
+flask
+flask_cors
+flask_bootstrap
+flask_wtf
+matplotlib
+pandas
