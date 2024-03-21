@@ -33,7 +33,7 @@ rds_database = "data"
 def render(datas, figure_description='Figure'):
     if datas == None:
         return None
-    font1 = font(fname='./asset/NotoSansTC-ExtraBold.ttf')
+    font1 = font(fname='./static/NotoSansTC-ExtraBold.ttf')
     colors = ['yellow', 'red', 'green', 'orange', 'pink']
     fig = Figure()
     ax = fig.subplots()

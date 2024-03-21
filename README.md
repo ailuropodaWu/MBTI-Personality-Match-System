@@ -20,7 +20,7 @@ flask --app main --debug run
 
 ## DEMO
 Website screenshot
-![alt text](./asset/image.png)
+![alt text](./asset/form_screenshot.png)
 
 ## Acknowledge
 ***This was originally a group project, and I redo it based on*** [***link***](https://github.com/HaKkaz/NYCU-Introduction-to-Database-Systems)
