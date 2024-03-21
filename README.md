@@ -1,5 +1,5 @@
 # MBTI Personality Match System
-***NYCU-Intro-Database-Final-Project***
+***NYCU Intro. Database final project***
 
 ## Introduction
 **By answering some questions, we will tell you the proportion of opposite-sex users whose personality is compatible with yours in the database we selected.**
