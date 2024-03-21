@@ -4,8 +4,12 @@ from flask_cors import CORS
 from flask_bootstrap import Bootstrap
 from flask_wtf.csrf import CSRFProtect
 import os
+import base64
+import codecs
 import sqlite3
-
+from io import BytesIO
+from matplotlib.figure import Figure
+from matplotlib.font_manager import FontProperties as font
 from form import MyForm, get_data
 from mbti import mbti_statement
 '''
@@ -26,9 +30,33 @@ rds_database = "data"
 
 
 
-'''
-Function to get form data.
-'''
+def render(datas, figure_description='Figure'):
+    if datas == None:
+        return None
+    font1 = font(fname='./asset/NotoSansTC-ExtraBold.ttf')
+    colors = ['yellow', 'red', 'green', 'orange', 'pink']
+    fig = Figure()
+    ax = fig.subplots()
+    data_ratio = [v[1] for v in datas]
+    data_label = [v[0] for v in datas]
+    patches, l_text, p_text = ax.pie(x=data_ratio, 
+                                     labels=data_label, 
+                                     autopct="%1.2f%%", 
+                                     wedgeprops = {"linewidth": 1, "edgecolor": "white"},
+                                     colors=colors,
+                                     shadow=True)
+    for t in l_text:
+        t.set_fontproperties(font1)
+        t.set_color('white')
+        t.set_fontsize('large')
+    buf = BytesIO()
+    fig.savefig(buf, format="png", transparent=True)
+    data = base64.b64encode(buf.getbuffer()).decode("ascii")
+    return f"<figure> \
+                <img src='data:image/png;base64,{data}'/ style='margin-left: 25%; width: 50%'> \
+                <figcaption style='text-align: center; color: #fff; font-weight: bold; font-size: 24px'>{figure_description}</figcaption> \
+            </figure>" 
+
 
 @app.route('/',methods=['GET', 'POST'])
 def index():
@@ -45,20 +73,8 @@ def index():
             gender = 'female'
         else:
             gender = 'male'
-        '''
-        check update
-        '''
-        '''
-        db_engine.execute(f"""
-            select * from hometown;
-        """)
-        datas = list(db_engine.fetchall())
-        test = ""
-        for data in datas:
-            for i in data:
-                test += str(i)
-            test += "<br>"
-        '''
+            
+        
         db_engine.executescript(f"""
             create temp view if not exists matched_mbti as
                 select suitable_mbti
@@ -94,13 +110,8 @@ def index():
             group by area
             order by percentage desc;
         """)
-        datas = list(db_engine.fetchall())
-        area_matched = ""
-        for data in datas:
-            for num in data:
-                area_matched += str(num)
-            area_matched += "% "
-        area_matched = "配對對象的地區分布 : " + area_matched + "<br>"
+        area_datas = list(db_engine.fetchall())
+
         db_engine.execute(f"""
             select 
 	            star_sign,
@@ -111,13 +122,8 @@ def index():
             group by star_sign
             order by percentage desc
         """)
-        datas = list(db_engine.fetchall())
-        star_matched = ""
-        for data in datas:
-            for num in data:
-                star_matched += str(num)
-            star_matched += "% "
-        star_matched = "配對對象的星座分布 : " + star_matched + "<br>"
+        star_datas = list(db_engine.fetchall())
+
         db_engine.execute(f"""
             select 
                 school_name,
@@ -128,15 +134,30 @@ def index():
             group by school_name
             order by percentage desc
         """)
-        datas = list(db_engine.fetchall())
-        school_matched = ""
-        for data in datas:
-            for num in data:
-                school_matched += str(num)
-            school_matched += "% "
-        school_matched = "配對對象的學校分布 : " + school_matched + "<br>"
-        return "你的性格是 : " + mbti + "<br>" + mbti_statement[mbti][0] + " : " + mbti_statement[mbti][1] + "<br>" + \
-                all_matched + area_matched + star_matched + school_matched
+        school_datas = list(db_engine.fetchall())
+
+        ### reder the figure
+        result = """
+                <style>
+                    html {
+                        background: url('./static/form_background.jpg') no-repeat center center fixed;
+                        -webkit-background-size: cover;
+                        -moz-background-size: cover;
+                        -o-background-size: cover;
+                        background-size: cover;
+                    }
+                </style>
+        
+        """
+        mbti_match = f"<p style='text-align: center; color: #fff; font-weight: bold; font-size: 30px'> 你的性格是 : {mbti} <br> {mbti_statement[mbti][0]}: {mbti_statement[mbti][1]}<br>"
+
+        result +=  mbti_match+ \
+                all_matched + \
+                render(area_datas, "來自的地區") + \
+                render(star_datas, "星座比例") + \
+                render(school_datas, "來自的學校")
+        return result
+
         db_engine.executescript('''
             drop view matched_mbti;
             drop view matched_index;
