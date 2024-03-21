@@ -75,32 +75,34 @@ def index():
             gender = 'male'
             
         
-        db_engine.executescript(f"""
+        db_engine.execute(f"""
             create temp view if not exists matched_mbti as
                 select suitable_mbti
                 from mbti_match
                 where asked_mbti = '{mbti}';
-            
+        """)
+        db_engine.execute(f"""
             create temp view if not exists matched_index as
                 select num
                 from subject natural join test_result, matched_mbti
                 where 
                 age between '{age}' - 2 and '{age}' + 2 and 
                 gender = '{gender}' and mbti_result = suitable_mbti;
-
-            select 
-                cast(count(num) as float) * 100 / (select count(num) from subject) 
-                        as percentage
-            from matched_index;
+        """)
+        db_engine.execute(f"""
+            select cast(count(num) as float) * 100 / (select count(num) from subject) as percentage 
+                from matched_index;
         """)
         
         datas = list(db_engine.fetchall())
         all_matched = ""
+        print(datas)
         for data in datas:
             for num in data:
-                all_matched += str(num)
+                all_matched += str(round(num, 2))
             all_matched += "% "
-        all_matched = "在曾經參與此網站檢測的人當中，與你適配的異性有 : " + all_matched + "<br>"
+        all_matched = "<p style='text-align: center; color: #fff; font-weight: bold; font-size: 30px'>\
+                        在曾經參與此網站檢測的人當中，與你適配的異性有 : " + all_matched + "<br>"
         db_engine.execute(f"""
             
             select area,
@@ -149,9 +151,11 @@ def index():
                 </style>
         
         """
-        mbti_match = f"<p style='text-align: center; color: #fff; font-weight: bold; font-size: 30px'> 你的性格是 : {mbti} <br> {mbti_statement[mbti][0]}: {mbti_statement[mbti][1]}<br>"
-
+        mbti_match = f"<p style='text-align: center; color: #fff; font-weight: bold; font-size: 30px'> 你的性格是 : \
+                        {mbti} <br> {mbti_statement[mbti][0]}: {mbti_statement[mbti][1]}<br>"
+        mbti_icon = f"<img src='./static/mbti_icon/{mbti}.png'/ style='width: 10%'>"
         result +=  mbti_match+ \
+                mbti_icon + \
                 all_matched + \
                 render(area_datas, "來自的地區") + \
                 render(star_datas, "星座比例") + \
