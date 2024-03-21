@@ -28,10 +28,13 @@ flask --app main --debug run
 
 Result Analysis
 - Region
+
 ![region](./asset/region_analysis.png)
 - Constellation
+
 ![constellation](./asset/constellation_analysis.png)
 - School
+
 ![school](./asset/school_analysis.png)
 
 ## Acknowledge
